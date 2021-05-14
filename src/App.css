@@ -136,3 +136,17 @@ body {
 .white-text {
 	color: white;
 }
+
+.white-text:hover,
+.white-text:active,
+.white-text:focus {
+	color: #69c0ff;
+}
+
+.previous {
+	margin-left: 10px;
+}
+
+.next {
+	margin-right: 10px;
+}

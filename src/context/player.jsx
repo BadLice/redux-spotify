@@ -7,6 +7,8 @@ const usePlayer = () => {
 	const queue = useSelector((state) => state.player.queue);
 	const index = useSelector((state) => state.player.index);
 	const isPlaying = useSelector((state) => state.player.isPlaying);
+	const shuffle = useSelector((state) => state.player.shuffle);
+	const repeat = useSelector((state) => state.player.repeat);
 	const url = queue && index !== null ? queue[index].url : null;
 
 	const [audio, setAudio] = useState(null);
@@ -50,11 +52,13 @@ const usePlayer = () => {
 	}, [audio, dispatch]);
 
 	const previous = useCallback(() => {
-		if ((audio && audio.currentTime > 5) || index === 0) {
-			audio.currentTime = 0;
-		} else {
-			audio.currentTime = 0;
-			dispatch(playerActions.previous());
+		if (audio) {
+			if (audio.currentTime > 5 || index === 0) {
+				audio.currentTime = 0;
+			} else {
+				audio.currentTime = 0;
+				dispatch(playerActions.previous());
+			}
 		}
 	}, [audio, dispatch, index]);
 
@@ -69,6 +73,18 @@ const usePlayer = () => {
 		if (audio) {
 			audio.pause();
 			dispatch(playerActions.pause());
+		}
+	}, [audio, dispatch]);
+
+	const toggleShuffle = useCallback(() => {
+		if (audio) {
+			dispatch(playerActions.toggleShuffle());
+		}
+	}, [audio, dispatch]);
+
+	const toggleRepeat = useCallback(() => {
+		if (audio) {
+			dispatch(playerActions.toggleRepeat());
 		}
 	}, [audio, dispatch]);
 
@@ -117,6 +133,10 @@ const usePlayer = () => {
 		previous,
 		next,
 		url,
+		toggleShuffle,
+		toggleRepeat,
+		shuffle,
+		repeat,
 	};
 };
 

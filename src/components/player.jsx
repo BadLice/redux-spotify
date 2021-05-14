@@ -1,8 +1,10 @@
 import {
 	CaretRightOutlined,
 	PauseOutlined,
+	RetweetOutlined,
 	StepBackwardOutlined,
 	StepForwardOutlined,
+	SwapOutlined,
 } from '@ant-design/icons';
 import { Affix, Button, Slider } from 'antd';
 import Text from 'antd/lib/typography/Text';
@@ -42,9 +44,13 @@ const Player = () => {
 		previous,
 		queue,
 		index,
+		toggleShuffle,
+		toggleRepeat,
+		repeat,
+		shuffle,
 	} = useContext(PlayerContext);
 	const [progress, setProgress] = useState(0);
-	const shuffler = useMemo(
+	const waveShuffler = useMemo(
 		() => [
 			9, 7, 21, 11, 25, 13, 14, 4, 10, 26, 6, 16, 15, 3, 5, 23, 8, 22, 17,
 			18, 20, 24, 12, 27, 19,
@@ -65,7 +71,7 @@ const Player = () => {
 
 			for (let i = 0; i < elements.length; i++) {
 				elements[i].style.height =
-					((arr[shuffler[i]] * 80) / 255 || 1) + 'px';
+					((arr[waveShuffler[i]] * 80) / 255 || 1) + 'px';
 				if (reset) {
 					elements[i].className = 'spectrum-item spectrum-item-reset';
 				} else {
@@ -73,7 +79,7 @@ const Player = () => {
 				}
 			}
 		},
-		[shuffler]
+		[waveShuffler]
 	);
 
 	const clearSpectrum = useCallback(() => {
@@ -130,6 +136,13 @@ const Player = () => {
 		previous();
 	}, [previous]);
 
+	const handleShuffle = useCallback(() => {
+		toggleShuffle();
+	}, [toggleShuffle]);
+	const handleRepeat = useCallback(() => {
+		toggleRepeat();
+	}, [toggleRepeat]);
+
 	useEffect(() => {
 		if (audio) {
 			audio.addEventListener('timeupdate', updateProgress);
@@ -151,10 +164,18 @@ const Player = () => {
 				</div>
 				<div className='commands'>
 					<Button
+						type={repeat ? 'primary' : 'text'}
+						shape='circle'
+						className='white-text'
+						icon={<RetweetOutlined />}
+						onClick={handleRepeat}
+					/>
+					<Button
 						ghost
 						shape='circle'
 						icon={<StepBackwardOutlined />}
 						onClick={handlePrevious}
+						className='previous'
 					/>
 					<Button
 						ghost
@@ -174,6 +195,14 @@ const Player = () => {
 						shape='circle'
 						icon={<StepForwardOutlined />}
 						onClick={handleNext}
+						className='next'
+					/>
+					<Button
+						type={shuffle ? 'primary' : 'text'}
+						shape='circle'
+						className='white-text'
+						icon={<SwapOutlined />}
+						onClick={handleShuffle}
 					/>
 				</div>
 				<div className='progress'>
