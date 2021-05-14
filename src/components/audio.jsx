@@ -13,7 +13,7 @@ const Audio = ({ renderPlay, renderPause, index, queue, ...rest }) => {
 
 	const url = queue[index];
 	const playerUrl =
-		playerQueue && playerIndex ? playerQueue[playerIndex] : null;
+		playerQueue && !isNaN(playerIndex) ? playerQueue[playerIndex] : null;
 	const iAmInPlayer = playerUrl ? playerUrl === url : false;
 
 	const handlePlay = () => {

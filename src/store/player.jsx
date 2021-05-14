@@ -22,17 +22,31 @@ const playerSlice = createSlice({
 			}
 		},
 		previous(state) {
-			if (state.queue && state.index > 0) {
-				state.index--;
+			if (state.queue) {
+				do {
+					state.index--;
+				} while (!state.queue[state.index] && state.index >= 0);
+
+				if (state.index < 0) {
+					state.isPlaying = false;
+					state.index = null;
+					state.queue = null;
+				}
 			}
 		},
 		setIndex(state, { payload }) {
 			state.index = payload.index;
 		},
 		play(state, { payload }) {
-			state.index = payload.index ?? 0;
-			state.queue = payload.queue;
-			state.isPlaying = true;
+			if (!payload) {
+				state.isPlaying = true;
+			} else {
+				if (payload) {
+					state.index = payload.index ?? 0;
+					state.queue = payload.queue;
+					state.isPlaying = true;
+				}
+			}
 		},
 		pause(state, { payload }) {
 			state.isPlaying = false;

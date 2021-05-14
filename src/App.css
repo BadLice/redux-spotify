@@ -65,22 +65,58 @@ body {
 	margin-right: 10px;
 }
 
-.footer {
+.player {
+	position: relative;
 	display: flex;
-	justify-content: baseline;
-	padding-top: 40px;
-	/* padding-left: 250px; */
+	align-items: center;
+	justify-content: center;
 	text-align: center;
 	background-color: #262626;
 	color: #fff;
 	height: 120px;
+}
+.spectrum,
+.commands,
+.progress {
+	display: flex;
+	position: absolute;
+	height: 120px;
+}
+
+.spectrum {
+	opacity: 0.5;
+	z-index: 0;
+}
+.progress {
+	align-items: center;
+	color: white;
+	margin-top: 40px;
+	height: 60px;
+	z-index: 10;
+}
+.commands {
+	margin-top: -20px;
+	height: 60px;
+}
+
+.play {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.progress-slider {
+	width: 480px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 30px;
 }
 .spectrum-item {
 	display: inline-block;
 	width: 10px;
 	height: 1px;
 	background-color: #40a9ff;
-	margin-right: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
 	border-radius: 10px;
 	position: relative;
 	top: 50%;

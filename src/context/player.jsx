@@ -42,8 +42,35 @@ const usePlayer = () => {
 	}, [audio, audioContext]);
 
 	const next = useCallback(() => {
+		if (audio) {
+			audio.currentTime = 0;
+		}
+
 		dispatch(playerActions.next());
-	}, [dispatch]);
+	}, [audio, dispatch]);
+
+	const previous = useCallback(() => {
+		if ((audio && audio.currentTime > 5) || index === 0) {
+			audio.currentTime = 0;
+		} else {
+			audio.currentTime = 0;
+			dispatch(playerActions.previous());
+		}
+	}, [audio, dispatch, index]);
+
+	const play = useCallback(() => {
+		if (audio) {
+			audio.play();
+			dispatch(playerActions.play());
+		}
+	}, [audio, dispatch]);
+
+	const pause = useCallback(() => {
+		if (audio) {
+			audio.pause();
+			dispatch(playerActions.pause());
+		}
+	}, [audio, dispatch]);
 
 	useEffect(() => {
 		if (audio) {
@@ -60,6 +87,10 @@ const usePlayer = () => {
 				audio.pause();
 			}
 
+			if (!queue && !isPlaying) {
+				destroyAudio();
+			}
+
 			audio.addEventListener('ended', next);
 			return () => audio.removeEventListener('ended', next);
 		}
@@ -69,7 +100,7 @@ const usePlayer = () => {
 				initAudio();
 			}
 		}
-	}, [audio, destroyAudio, initAudio, isPlaying, next, url]);
+	}, [audio, destroyAudio, initAudio, isPlaying, next, queue, url]);
 
 	return {
 		isPlaying,
@@ -81,6 +112,10 @@ const usePlayer = () => {
 		setAudioContext,
 		queue,
 		index,
+		play,
+		pause,
+		previous,
+		next,
 	};
 };
 
