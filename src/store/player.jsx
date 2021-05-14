@@ -10,7 +10,7 @@ const playerSlice = createSlice({
 				do {
 					state.index++;
 				} while (
-					!state.queue[state.index] &&
+					!state.queue[state.index].url &&
 					state.index < state.queue.length
 				);
 
@@ -25,7 +25,7 @@ const playerSlice = createSlice({
 			if (state.queue) {
 				do {
 					state.index--;
-				} while (!state.queue[state.index] && state.index >= 0);
+				} while (!state.queue[state.index].url && state.index >= 0);
 
 				if (state.index < 0) {
 					state.isPlaying = false;

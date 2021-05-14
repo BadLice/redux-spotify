@@ -5,7 +5,9 @@ import {
 	StepForwardOutlined,
 } from '@ant-design/icons';
 import { Affix, Button, Slider } from 'antd';
+import Text from 'antd/lib/typography/Text';
 import React, {
+	Fragment,
 	memo,
 	useCallback,
 	useContext,
@@ -30,8 +32,17 @@ const durationToMinutesStr = (duration) => {
 };
 
 const Player = () => {
-	const { isPlaying, audio, analyzer, play, pause, next, previous } =
-		useContext(PlayerContext);
+	const {
+		isPlaying,
+		audio,
+		analyzer,
+		play,
+		pause,
+		next,
+		previous,
+		queue,
+		index,
+	} = useContext(PlayerContext);
 	const [progress, setProgress] = useState(0);
 	const shuffler = useMemo(
 		() => [
@@ -39,6 +50,10 @@ const Player = () => {
 			18, 20, 24, 12, 27, 19,
 		],
 		[]
+	);
+	const track = useMemo(
+		() => (queue && !isNaN(index) ? queue[index] : null),
+		[index, queue]
 	);
 
 	const setStyle = useCallback(
@@ -180,6 +195,29 @@ const Player = () => {
 							},
 						}}
 					/>
+				</div>
+				<div className='info'>
+					{track && (
+						<>
+							<Text className='white-text'>{track.name}</Text>{' '}
+							&nbsp;&bull;&nbsp;
+							{track.artists.map((artist, i) => (
+								<Fragment key={i}>
+									<Text
+										underline
+										className='text-link white-text'
+									>
+										{artist.name}
+									</Text>
+									{i !== track.artists.length - 1 && (
+										<Text className='white-text'>
+											&nbsp;-&nbsp;
+										</Text>
+									)}
+								</Fragment>
+							))}
+						</>
+					)}
 				</div>
 			</div>
 		</Affix>

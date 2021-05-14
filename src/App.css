@@ -73,14 +73,20 @@ body {
 	text-align: center;
 	background-color: #262626;
 	color: #fff;
-	height: 120px;
+	height: 180px;
 }
 .spectrum,
 .commands,
-.progress {
+.progress,
+.info {
 	display: flex;
 	position: absolute;
-	height: 120px;
+	height: 150px;
+}
+
+.info {
+	margin-top: 140px;
+	height: 50px;
 }
 
 .spectrum {
@@ -90,13 +96,13 @@ body {
 .progress {
 	align-items: center;
 	color: white;
-	margin-top: 40px;
-	height: 60px;
+	margin-top: 0px;
+	height: 50px;
 	z-index: 10;
 }
 .commands {
-	margin-top: -20px;
-	height: 60px;
+	margin-top: -60px;
+	height: 50px;
 }
 
 .play {
@@ -125,4 +131,8 @@ body {
 
 .spectrum-item-reset {
 	transition: height 3s ease-out;
+}
+
+.white-text {
+	color: white;
 }

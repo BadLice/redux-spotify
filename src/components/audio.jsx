@@ -5,15 +5,10 @@ import { playerActions } from '../store/player';
 
 const Audio = ({ renderPlay, renderPause, index, queue, ...rest }) => {
 	const dispatch = useDispatch();
-	const {
-		isPlaying: playerIsPlaying,
-		queue: playerQueue,
-		index: playerIndex,
-	} = useContext(PlayerContext);
+	const { isPlaying: playerIsPlaying, url: playerUrl } =
+		useContext(PlayerContext);
 
-	const url = queue[index];
-	const playerUrl =
-		playerQueue && !isNaN(playerIndex) ? playerQueue[playerIndex] : null;
+	const url = queue[index].url;
 	const iAmInPlayer = playerUrl ? playerUrl === url : false;
 
 	const handlePlay = () => {

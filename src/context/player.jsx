@@ -7,7 +7,7 @@ const usePlayer = () => {
 	const queue = useSelector((state) => state.player.queue);
 	const index = useSelector((state) => state.player.index);
 	const isPlaying = useSelector((state) => state.player.isPlaying);
-	const url = queue && index !== null ? queue[index] : null;
+	const url = queue && index !== null ? queue[index].url : null;
 
 	const [audio, setAudio] = useState(null);
 	const [analyzer, setAnalyzer] = useState(null);
@@ -116,6 +116,7 @@ const usePlayer = () => {
 		pause,
 		previous,
 		next,
+		url,
 	};
 };
 

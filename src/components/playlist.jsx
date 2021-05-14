@@ -17,9 +17,11 @@ const PlayList = () => {
 	const queue = useMemo(
 		() =>
 			playlist
-				? playlist.tracks.items.map(
-						(track) => track.track.preview_url ?? null
-				  )
+				? playlist.tracks.items.map((track) => ({
+						url: track.track.preview_url,
+						name: track.track.name,
+						artists: track.track.artists,
+				  }))
 				: [],
 		[playlist]
 	);
