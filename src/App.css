@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+body {
+	background-color: #141414;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.site-layout-content {
+	min-height: 813px;
+	padding: 30px;
+	background: #fff;
+}
+.logo {
+	float: left;
+	width: 120px;
+	height: 31px;
+	margin: 16px 24px 16px 0;
+	background: rgba(255, 255, 255, 0.3);
+}
+.ant-row-rtl .logo {
+	float: right;
+	margin: 16px 0 16px 24px;
+}
+[data-theme='dark'] .site-layout-content {
+	background: #141414;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-menu {
+	float: right;
+}
+.ant-layout-header {
+	background-color: #262626;
+	padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login-button {
+	background-color: #52c41a;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-user-avatar {
+	float: right;
+	margin-right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-popover,
+.ant-popover-inner-content,
+.ant-popover-title {
+	color: white;
+}
+.ant-popover-inner {
+	background-color: #141414;
+}
+
+.ant-card-meta-description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+.text-link:hover {
+	color: #1890ff;
+	cursor: pointer;
+}
+.playlist-edit-button {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.footer {
+	display: flex;
+	justify-content: baseline;
+	padding-top: 40px;
+	/* padding-left: 250px; */
+	text-align: center;
+	background-color: #262626;
+	color: #fff;
+	height: 120px;
+}
+.spectrum-item {
+	display: inline-block;
+	width: 10px;
+	height: 1px;
+	background-color: #40a9ff;
+	margin-right: 10px;
+	border-radius: 10px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.spectrum-item-reset {
+	transition: height 3s ease-out;
 }
